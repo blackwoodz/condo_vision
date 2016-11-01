@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => "units#index"
   # Routes for the Unit resource:
   # CREATE
   get "/units/new", :controller => "units", :action => "new"
