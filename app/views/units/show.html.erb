@@ -1,0 +1,22 @@
+<div class="page-header">
+  <h3>Unit #<%= @unit.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/units" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/units/<%= @unit.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_unit/<%= @unit.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

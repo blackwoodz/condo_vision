@@ -1,0 +1,28 @@
+<!-- Validation failure messages -->
+<% if @unit.errors.any? %>
+  <% @unit.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Unit</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_unit" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <button class="btn btn-success">
+        Create Unit
+      </button>
+      or
+      <a href="/units">Cancel</a>
+    </form>
+  </div>
+</div>
