@@ -1,6 +1,6 @@
 class UnitsController < ApplicationController
   def index
-    @units = Unit.all
+    @units = Unit.page(params[:page])
   end
 
   def show
