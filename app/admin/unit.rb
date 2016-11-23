@@ -1,6 +1,6 @@
 ActiveAdmin.register Unit do
 
- permit_params 
+ permit_params :unit_number, :monthly_dues
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

@@ -24,8 +24,6 @@ gem 'coffee-rails', '~> 4.2'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -49,18 +47,16 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'font-awesome-sass', '~> 4.5.0'
 gem 'devise'
-gem 'starter_generators', :git => 'https://github.com/raghubetina/starter_generators.git'
+gem 'starter_generators', :git => 'https://github.com/raghubetina/starter_generators.git',  :branch => 'firstdraft'
+gem 'font-awesome-sass', '~> 4.5.0'
 gem 'activeadmin', '~> 1.0.0.pre4'
 gem 'inherited_resources', :git => 'https://github.com/activeadmin/inherited_resources.git'
-gem 'carrierwave'
-gem 'cloudinary'
-gem 'dotenv-rails', :groups => [:development, :test]
-gem 'gmaps4rails'
-gem 'underscore-rails'
 gem "rollbar"
 gem "kaminari"
 gem "bootstrap4-kaminari-views"
-gem 'seed_dump', :git => 'https://github.com/murugan-r/seed_dump.git'
+gem 'seed_dump', :git => 'https://github.com/firstdraft/seed_dump.git'
 gem 'activerecord-import'
+gem "ransack"
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'

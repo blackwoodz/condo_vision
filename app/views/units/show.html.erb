@@ -3,8 +3,14 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
+      <dt>Unit number</dt>
+      <dd><%= @unit.unit_number %></dd>
+
+      <dt>Monthly dues</dt>
+      <dd><%= @unit.monthly_dues %></dd>
+
     </dl>
 
     <div class="btn-group btn-group-justified">
@@ -18,5 +24,148 @@
         Delete
       </a>
     </div>
+  </div>
+</div>
+
+<!-- A Unit has many invoices -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Invoices
+      </li>
+
+      <% @unit.invoices.each do |invoice| %>
+        <li class="list-group-item">
+          <a href="/invoices/<%= invoice.id %>">
+            <%= invoice.unit_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/invoices/<%= invoice.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/invoices/<%= invoice.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_invoice/<%= invoice.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_invoice" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for unit_id -->
+      <input type="hidden" name="unit_id" value="<%= @unit.id %>">
+
+      <!-- Label and input for status -->
+      <div class="form-group">
+        <label for="status" class="control-label">
+          Status
+        </label>
+
+        <input type="text" id="status" name="status" placeholder="Status" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for amount -->
+      <div class="form-group">
+        <label for="amount" class="control-label">
+          Amount
+        </label>
+
+        <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for owner_id -->
+      <div class="form-group">
+        <label for="owner_id" class="control-label">
+          Owner
+        </label>
+
+        <%= select_tag(:owner_id, options_from_collection_for_select(User.all, :id, :email), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for assessment_type -->
+      <div class="form-group">
+        <label for="assessment_type" class="control-label">
+          Assessment type
+        </label>
+
+        <input type="text" id="assessment_type" name="assessment_type" placeholder="Assessment type" class="form-control" value="">
+      </div>
+
+      <button class="btn btn-block btn-success">
+        Create Invoice
+      </button>
+    </form>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- A Unit has many owner -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Owner
+      </li>
+
+      <% @unit.owner.each do |user| %>
+        <li class="list-group-item">
+          <a href="/users/<%= user.id %>">
+            <%= user.email %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/users/<%= user.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/users/<%= user.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_user/<%= user.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A Unit has many tenant -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Tenant
+      </li>
+
+      <% @unit.tenant.each do |user| %>
+        <li class="list-group-item">
+          <a href="/users/<%= user.id %>">
+            <%= user.email %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/users/<%= user.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/users/<%= user.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_user/<%= user.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>

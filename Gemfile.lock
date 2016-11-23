@@ -9,7 +9,7 @@ GIT
       responders
 
 GIT
-  remote: https://github.com/murugan-r/seed_dump.git
+  remote: https://github.com/firstdraft/seed_dump.git
   revision: 08707d80fa0d9776b2118fbdabd66f9548181e0a
   specs:
     seed_dump (3.2.4)
@@ -18,7 +18,8 @@ GIT
 
 GIT
   remote: https://github.com/raghubetina/starter_generators.git
-  revision: bb818e7b2b531da20a6c3b05bec9ef807ca82af2
+  revision: 8127fb9dd6671cb4084316aebe411974a4507370
+  branch: firstdraft
   specs:
     starter_generators (0.9.6)
 
@@ -71,7 +72,7 @@ GEM
       activemodel (= 5.0.0.1)
       activesupport (= 5.0.0.1)
       arel (~> 7.0)
-    activerecord-import (0.16.1)
+    activerecord-import (0.16.2)
       activerecord (>= 3.2)
     activesupport (5.0.0.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
@@ -81,8 +82,9 @@ GEM
     arbre (1.1.1)
       activesupport (>= 3.0.0)
     arel (7.1.4)
-    aws_cf_signer (0.1.3)
     bcrypt (3.1.11)
+    bootstrap3-datetimepicker-rails (4.14.30)
+      momentjs-rails (>= 2.8.1)
     bootstrap4-kaminari-views (1.0.0)
       kaminari (>= 0.13)
       rails (>= 3.1)
@@ -91,15 +93,6 @@ GEM
       thor (~> 0.19)
     builder (3.2.2)
     byebug (9.0.6)
-    carrierwave (0.11.2)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
-      mime-types (>= 1.16)
-      mimemagic (>= 0.3.0)
-    cloudinary (1.2.4)
-      aws_cf_signer
-      rest-client
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.2.x)
@@ -115,12 +108,6 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
-    domain_name (0.5.20161021)
-      unf (>= 0.0.5, < 1.0.0)
-    dotenv (2.1.1)
-    dotenv-rails (2.1.1)
-      dotenv (= 2.1.1)
-      railties (>= 4.0, < 5.1)
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.14)
@@ -131,12 +118,9 @@ GEM
     formtastic_i18n (0.6.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    gmaps4rails (2.1.2)
     has_scope (0.7.0)
       actionpack (>= 4.1, < 5.1)
       activesupport (>= 4.1, < 5.1)
-    http-cookie (1.0.3)
-      domain_name (~> 0.5)
     i18n (0.7.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -147,7 +131,6 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
-    json (2.0.2)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -162,11 +145,11 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mimemagic (0.3.2)
     mini_portile2 (2.1.0)
     minitest (5.9.1)
+    momentjs-rails (2.15.1)
+      railties (>= 3.1)
     multi_json (1.12.1)
-    netrc (0.11.0)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
@@ -174,7 +157,7 @@ GEM
     pg (0.19.0)
     polyamorous (1.3.1)
       activerecord (>= 3.0)
-    puma (3.6.0)
+    puma (3.6.2)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -218,11 +201,7 @@ GEM
       ffi (>= 0.5.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
-    rest-client (2.0.0)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
-    rollbar (2.13.1)
+    rollbar (2.13.3)
       multi_json
     sass (3.4.22)
     sass-rails (5.0.6)
@@ -242,17 +221,10 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
-    turbolinks (5.0.1)
-      turbolinks-source (~> 5)
-    turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.3)
       execjs (>= 0.3.0, < 3)
-    underscore-rails (1.8.3)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.2)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (3.4.0)
@@ -270,34 +242,31 @@ PLATFORMS
 DEPENDENCIES
   activeadmin (~> 1.0.0.pre4)
   activerecord-import
+  bootstrap3-datetimepicker-rails (~> 4.14.30)
   bootstrap4-kaminari-views
   byebug
-  carrierwave
-  cloudinary
   coffee-rails (~> 4.2)
   devise
-  dotenv-rails
   font-awesome-sass (~> 4.5.0)
-  gmaps4rails
   inherited_resources!
   jbuilder (~> 2.5)
   jquery-rails
   kaminari
   listen (~> 3.0.5)
+  momentjs-rails (>= 2.9.0)
   pg
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
   rails_12factor
+  ransack
   rollbar
   sass-rails (~> 5.0)
   seed_dump!
   sqlite3
   starter_generators!
-  turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
-  underscore-rails
   web-console
 
 BUNDLED WITH
-   1.11.2
+   1.13.6

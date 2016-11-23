@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
       <dt>Email</dt>
       <dd><%= @user.email %></dd>
@@ -11,14 +11,23 @@
       <dt>Password</dt>
       <dd><%= @user.password %></dd>
 
-      <dt>Owner?</dt>
-      <dd><%= @user.owner? %></dd>
+      <dt>Current board member</dt>
+      <dd><%= @user.current_board_member %></dd>
 
-      <dt>Resident?</dt>
-      <dd><%= @user.resident? %></dd>
+      <dt>Contact phone number</dt>
+      <dd><%= @user.contact_phone_number %></dd>
 
-      <dt>Board member?</dt>
-      <dd><%= @user.board_member? %></dd>
+      <dt>First name</dt>
+      <dd><%= @user.first_name %></dd>
+
+      <dt>Last name</dt>
+      <dd><%= @user.last_name %></dd>
+
+      <dt>Mailing address</dt>
+      <dd><%= @user.mailing_address %></dd>
+
+      <dt>Site admin</dt>
+      <dd><%= @user.site_admin %></dd>
 
     </dl>
 
@@ -27,5 +36,191 @@
         Back
       </a>
     </div>
+  </div>
+</div>
+
+<!-- A User has many ownerships -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Ownerships
+      </li>
+
+      <% @user.ownerships.each do |ownership| %>
+        <li class="list-group-item">
+          <a href="/ownerships/<%= ownership.id %>">
+            <%= ownership.owner_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/ownerships/<%= ownership.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/ownerships/<%= ownership.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_ownership/<%= ownership.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many tenancies -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Tenancies
+      </li>
+
+      <% @user.tenancies.each do |tenancy| %>
+        <li class="list-group-item">
+          <a href="/tenancies/<%= tenancy.id %>">
+            <%= tenancy.tenant_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/tenancies/<%= tenancy.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/tenancies/<%= tenancy.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_tenancy/<%= tenancy.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many invoices -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Invoices
+      </li>
+
+      <% @user.invoices.each do |invoice| %>
+        <li class="list-group-item">
+          <a href="/invoices/<%= invoice.id %>">
+            <%= invoice.unit_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/invoices/<%= invoice.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/invoices/<%= invoice.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_invoice/<%= invoice.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many owned_units -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Owned_units
+      </li>
+
+      <% @user.owned_units.each do |unit| %>
+        <li class="list-group-item">
+          <a href="/units/<%= unit.id %>">
+            <%= unit.unit_number %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/units/<%= unit.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/units/<%= unit.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_unit/<%= unit.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many payments -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Payments
+      </li>
+
+      <% @user.payments.each do |payment| %>
+        <li class="list-group-item">
+          <a href="/payments/<%= payment.id %>">
+            <%= payment.invoice_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/payments/<%= payment.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/payments/<%= payment.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_payment/<%= payment.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many occupied_units -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Occupied_units
+      </li>
+
+      <% @user.occupied_units.each do |unit| %>
+        <li class="list-group-item">
+          <a href="/units/<%= unit.id %>">
+            <%= unit.unit_number %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/units/<%= unit.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/units/<%= unit.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_unit/<%= unit.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>

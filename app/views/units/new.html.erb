@@ -18,6 +18,24 @@
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
+      <!-- Label and input for unit_number -->
+      <div class="form-group">
+        <label for="unit_number" class="control-label">
+          Unit number
+        </label>
+
+        <input type="text" id="unit_number" name="unit_number" placeholder="Unit number" class="form-control" value="<%= @unit.unit_number %>">
+      </div>
+
+      <!-- Label and input for monthly_dues -->
+      <div class="form-group">
+        <label for="monthly_dues" class="control-label">
+          Monthly dues
+        </label>
+
+        <input type="text" id="monthly_dues" name="monthly_dues" placeholder="Monthly dues" class="form-control" value="<%= @unit.monthly_dues %>">
+      </div>
+
       <button class="btn btn-success">
         Create Unit
       </button>

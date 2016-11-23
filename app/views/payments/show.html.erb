@@ -1,0 +1,68 @@
+<div class="page-header">
+  <h3>Payment #<%= @payment.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Invoice</dt>
+      <dd>
+        <% if @payment.invoice.present? %>
+          <a href="/invoices/<%= @payment.invoice_id %>">
+            <%= @payment.invoice.unit_id %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>Amount</dt>
+      <dd><%= @payment.amount %></dd>
+
+      <dt>Status</dt>
+      <dd><%= @payment.status %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/payments" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/payments/<%= @payment.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_payment/<%= @payment.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- A Payment has many payer -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Payer
+      </li>
+
+      <% @payment.payer.each do |user| %>
+        <li class="list-group-item">
+          <a href="/users/<%= user.id %>">
+            <%= user.email %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/users/<%= user.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/users/<%= user.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_user/<%= user.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

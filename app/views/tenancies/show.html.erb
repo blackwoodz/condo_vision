@@ -1,0 +1,46 @@
+<div class="page-header">
+  <h3>Tenancy #<%= @tenancy.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Tenant</dt>
+      <dd>
+        <% if @tenancy.tenant.present? %>
+          <a href="/users/<%= @tenancy.tenant_id %>">
+            <%= @tenancy.tenant.email %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>Unit</dt>
+      <dd>
+        <% if @tenancy.unit.present? %>
+          <a href="/units/<%= @tenancy.unit_id %>">
+            <%= @tenancy.unit.unit_number %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>Start date</dt>
+      <dd><%= @tenancy.start_date %></dd>
+
+      <dt>End date</dt>
+      <dd><%= @tenancy.end_date %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/tenancies" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/tenancies/<%= @tenancy.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_tenancy/<%= @tenancy.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

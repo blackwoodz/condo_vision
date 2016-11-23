@@ -1,0 +1,55 @@
+<!-- Validation failure messages -->
+<% if @payment.errors.any? %>
+  <% @payment.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Payment</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_payment" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for invoice_id -->
+      <div class="form-group">
+        <label for="invoice_id" class="control-label">
+          Invoice
+        </label>
+
+        <%= select_tag(:invoice_id, options_from_collection_for_select(Invoice.all, :id, :unit_id, @payment.invoice_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for amount -->
+      <div class="form-group">
+        <label for="amount" class="control-label">
+          Amount
+        </label>
+
+        <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="<%= @payment.amount %>">
+      </div>
+
+      <!-- Label and input for status -->
+      <div class="form-group">
+        <label for="status" class="control-label">
+          Status
+        </label>
+
+        <input type="text" id="status" name="status" placeholder="Status" class="form-control" value="<%= @payment.status %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Payment
+      </button>
+      or
+      <a href="/payments">Cancel</a>
+    </form>
+  </div>
+</div>

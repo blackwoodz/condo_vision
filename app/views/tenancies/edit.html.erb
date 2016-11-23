@@ -1,0 +1,64 @@
+<!-- Validation failure messages -->
+<% if @tenancy.errors.any? %>
+  <% @tenancy.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Tenancy #<%= @tenancy.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_tenancy/<%= @tenancy.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for tenant_id -->
+      <div class="form-group">
+        <label for="tenant_id" class="control-label">
+          Tenant
+        </label>
+
+        <%= select_tag(:tenant_id, options_from_collection_for_select(User.all, :id, :email, @tenancy.tenant_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for unit_id -->
+      <div class="form-group">
+        <label for="unit_id" class="control-label">
+          Unit
+        </label>
+
+        <%= select_tag(:unit_id, options_from_collection_for_select(Unit.all, :id, :unit_number, @tenancy.unit_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for start_date -->
+      <div class="form-group">
+        <label for="start_date" class="control-label">
+          Start date
+        </label>
+
+        <input type="text" id="start_date" name="start_date" placeholder="Start date" class="form-control" value="<%= @tenancy.start_date %>">
+      </div>
+
+      <!-- Label and input for end_date -->
+      <div class="form-group">
+        <label for="end_date" class="control-label">
+          End date
+        </label>
+
+        <input type="text" id="end_date" name="end_date" placeholder="End date" class="form-control" value="<%= @tenancy.end_date %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Tenancy
+      </button>
+      or
+      <a href="/tenancies/<%= @tenancy.id %>">Cancel</a>
+    </form>
+  </div>
+</div>
