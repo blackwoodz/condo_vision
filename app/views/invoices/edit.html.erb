@@ -1,0 +1,73 @@
+<!-- Validation failure messages -->
+<% if @invoice.errors.any? %>
+  <% @invoice.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Invoice #<%= @invoice.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_invoice/<%= @invoice.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for unit_id -->
+      <div class="form-group">
+        <label for="unit_id" class="control-label">
+          Unit
+        </label>
+
+        <%= select_tag(:unit_id, options_from_collection_for_select(Unit.all, :id, :unit_number, @invoice.unit_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for status -->
+      <div class="form-group">
+        <label for="status" class="control-label">
+          Status
+        </label>
+
+        <input type="text" id="status" name="status" placeholder="Status" class="form-control" value="<%= @invoice.status %>">
+      </div>
+
+      <!-- Label and input for amount -->
+      <div class="form-group">
+        <label for="amount" class="control-label">
+          Amount
+        </label>
+
+        <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="<%= @invoice.amount %>">
+      </div>
+
+      <!-- Label and input for owner_id -->
+      <div class="form-group">
+        <label for="owner_id" class="control-label">
+          Owner
+        </label>
+
+        <%= select_tag(:owner_id, options_from_collection_for_select(User.all, :id, :email, @invoice.owner_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for assessment_type -->
+      <div class="form-group">
+        <label for="assessment_type" class="control-label">
+          Assessment type
+        </label>
+
+        <input type="text" id="assessment_type" name="assessment_type" placeholder="Assessment type" class="form-control" value="<%= @invoice.assessment_type %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Invoice
+      </button>
+      or
+      <a href="/invoices/<%= @invoice.id %>">Cancel</a>
+    </form>
+  </div>
+</div>

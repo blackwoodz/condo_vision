@@ -1,0 +1,112 @@
+<div class="page-header">
+  <h3>Invoice #<%= @invoice.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Unit</dt>
+      <dd>
+        <% if @invoice.unit.present? %>
+          <a href="/units/<%= @invoice.unit_id %>">
+            <%= @invoice.unit.unit_number %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>Status</dt>
+      <dd><%= @invoice.status %></dd>
+
+      <dt>Amount</dt>
+      <dd><%= @invoice.amount %></dd>
+
+      <dt>Owner</dt>
+      <dd>
+        <% if @invoice.owner.present? %>
+          <a href="/users/<%= @invoice.owner_id %>">
+            <%= @invoice.owner.email %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>Assessment type</dt>
+      <dd><%= @invoice.assessment_type %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/invoices" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/invoices/<%= @invoice.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_invoice/<%= @invoice.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- A Invoice has many payments -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Payments
+      </li>
+
+      <% @invoice.payments.each do |payment| %>
+        <li class="list-group-item">
+          <a href="/payments/<%= payment.id %>">
+            <%= payment.invoice_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/payments/<%= payment.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/payments/<%= payment.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_payment/<%= payment.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_payment" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for invoice_id -->
+      <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
+
+      <!-- Label and input for amount -->
+      <div class="form-group">
+        <label for="amount" class="control-label">
+          Amount
+        </label>
+
+        <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for status -->
+      <div class="form-group">
+        <label for="status" class="control-label">
+          Status
+        </label>
+
+        <input type="text" id="status" name="status" placeholder="Status" class="form-control" value="">
+      </div>
+
+      <button class="btn btn-block btn-success">
+        Create Payment
+      </button>
+    </form>
+      </li>
+    </ul>
+  </div>
+</div>

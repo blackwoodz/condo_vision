@@ -3,17 +3,101 @@
     Units
     <a href="/units/new" class="btn btn-lg btn-success">New Unit</a>
   </h1>
+</div><div class="row mb-1">
+  <div class="col-md-12">
+    <%= search_form_for @q, :class => "collapse", :id => "units_filters" do |f| %>
+      <p class="lead">Narrow results:</p>
+
+        <div class="form-group">
+    <%= f.label :unit_number_cont, "Unit number contains" %>
+    <%= f.text_field :unit_number_cont, :class => "form-control", :placeholder => "Unit number contains" %>
+  </div>
+
+<div class="form-group">
+  <%= f.label :monthly_dues, "Monthly dues" %>
+  <div class="row">
+    <div class='col-md-6 mb-1'>
+      <%= f.text_field :monthly_dues_gteq, :class => "form-control", :placeholder => "Monthly dues greater than or equal to" %>
+    </div>
+    <div class='col-md-6'>
+      <%= f.text_field :monthly_dues_lteq, :class => "form-control", :placeholder => "Monthly dues less than or equal to" %>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+          <%= f.label :created_at, "Created at" %>
+          <div class="row">
+            <div class='col-md-6 mb-1'>
+              <div class='input-group date' id='created_atgteqPicker'>
+                  <%= f.text_field :created_at_gteq, :class => "form-control", :placeholder => "Created at greater than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+
+            <div class='col-md-6'>
+              <div class='input-group date' id='created_atlteqPicker'>
+                  <%= f.text_field :created_at_lteq, :class => "form-control", :placeholder => "Created at less than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+          </div>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#created_atgteqPicker').datetimepicker({
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#created_atlteqPicker').datetimepicker({
+                  useCurrent: false,
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#created_atgteqPicker').on("dp.change", function (e) {
+                  $('#created_atlteqPicker').data("DateTimePicker").minDate(e.date);
+              });
+              $('#created_atlteqPicker').on("dp.change", function (e) {
+                  $('#created_atgteqPicker').data("DateTimePicker").maxDate(e.date);
+              });
+          });
+      </script>
+
+        <div class="form-group">
+      <%= f.label :owner_email_cont, "User email contains" %>
+      <%= f.text_field :owner_email_cont, :class => "form-control", :placeholder => "User email contains" %>
+    </div>
+
+<div class="form-group">
+      <%= f.label :tenant_email_cont, "User email contains" %>
+      <%= f.text_field :tenant_email_cont, :class => "form-control", :placeholder => "User email contains" %>
+    </div>
+
+      <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
+
+      <a href="/units" class="btn btn-default btn-block mb-1">Clear filters</a>
+    <% end %>
+    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#units_filters">
+      Show Filters
+    </a>
+  </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
+        <th>Unit number</th>
+        <th>Monthly dues</th>
         <th>Actions</th>
       </tr>
 
       <% @units.each do |unit| %>
       <tr>
+        <td><%= unit.unit_number %></td>
+        <td><%= unit.monthly_dues %></td>
         <td>
           <a href="/units/<%= unit.id %>" class="btn btn-primary">Show</a>
           <a href="/units/<%= unit.id %>/edit" class="btn btn-warning">Edit</a>

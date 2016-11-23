@@ -11,9 +11,12 @@
       <tr>
         <th>Email</th>
         <th>Password</th>
-        <th>Owner?</th>
-        <th>Resident?</th>
-        <th>Board member?</th>
+        <th>Current board member</th>
+        <th>Contact phone number</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Mailing address</th>
+        <th>Site admin</th>
         <th>Actions</th>
       </tr>
 
@@ -21,9 +24,12 @@
       <tr>
         <td><%= user.email %></td>
         <td><%= user.password %></td>
-        <td><%= user.owner? %></td>
-        <td><%= user.resident? %></td>
-        <td><%= user.board_member? %></td>
+        <td><%= user.current_board_member %></td>
+        <td><%= user.contact_phone_number %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.mailing_address %></td>
+        <td><%= user.site_admin %></td>
         <td>
           <a href="/users/<%= user.id %>" class="btn btn-primary">Show</a>
         </td>

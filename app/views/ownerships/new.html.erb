@@ -1,0 +1,98 @@
+<!-- Validation failure messages -->
+<% if @ownership.errors.any? %>
+  <% @ownership.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Ownership</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_ownership" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for owner_id -->
+      <div class="form-group">
+        <label for="owner_id" class="control-label">
+          Owner
+        </label>
+
+        <%= select_tag(:owner_id, options_from_collection_for_select(User.all, :id, :email, @ownership.owner_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for unit_id -->
+      <div class="form-group">
+        <label for="unit_id" class="control-label">
+          Unit
+        </label>
+
+        <%= select_tag(:unit_id, options_from_collection_for_select(Unit.all, :id, :unit_number, @ownership.unit_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for start_date -->
+      <div class="form-group">
+        <label for="start_date" class="control-label">
+          Start date
+        </label>
+
+        <input type="text" id="start_date" name="start_date" placeholder="Start date" class="form-control" value="<%= @ownership.start_date %>">
+      </div>
+
+      <!-- Label and input for end_date -->
+      <div class="form-group">
+        <label for="end_date" class="control-label">
+          End date
+        </label>
+
+        <input type="text" id="end_date" name="end_date" placeholder="End date" class="form-control" value="<%= @ownership.end_date %>">
+      </div>
+
+      <!-- Label and input for recurring_payments_on -->
+      <div class="checkbox">
+        <label for="recurring_payments_on">
+          <input type="checkbox" id="recurring_payments_on" name="recurring_payments_on" value="1" <%= "checked" if @ownership.recurring_payments_on %>>
+          Recurring payments on
+        </label>
+      </div>
+
+      <!-- Label and input for payment_token -->
+      <div class="form-group">
+        <label for="payment_token" class="control-label">
+          Payment token
+        </label>
+
+        <input type="text" id="payment_token" name="payment_token" placeholder="Payment token" class="form-control" value="<%= @ownership.payment_token %>">
+      </div>
+
+      <!-- Label and input for bank_authorization -->
+      <div class="form-group">
+        <label for="bank_authorization" class="control-label">
+          Bank authorization
+        </label>
+
+        <input type="text" id="bank_authorization" name="bank_authorization" placeholder="Bank authorization" class="form-control" value="<%= @ownership.bank_authorization %>">
+      </div>
+
+      <!-- Label and input for dues_delinquent -->
+      <div class="checkbox">
+        <label for="dues_delinquent">
+          <input type="checkbox" id="dues_delinquent" name="dues_delinquent" value="1" <%= "checked" if @ownership.dues_delinquent %>>
+          Dues delinquent
+        </label>
+      </div>
+
+      <button class="btn btn-success">
+        Create Ownership
+      </button>
+      or
+      <a href="/ownerships">Cancel</a>
+    </form>
+  </div>
+</div>
