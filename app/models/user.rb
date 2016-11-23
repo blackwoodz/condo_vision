@@ -31,13 +31,13 @@ class User < ApplicationRecord
 
   validates :contact_phone_number, :presence => true
 
-  validates :current_board_member, :presence => true
+  validates :current_board_member
 
   validates :first_name, :presence => true
 
   validates :last_name, :presence => true
 
-  validates :site_admin, :presence => true
+  validates :site_admin
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
