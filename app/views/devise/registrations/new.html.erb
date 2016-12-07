@@ -10,9 +10,37 @@
         <%= devise_error_messages! %>
 
         <div class="form-group">
+          <%= f.label :first_name, class: "col-sm-2 control-label" %>
+          <div class="col-sm-10">
+            <%= f.text_field :first_name, autofocus: true, :class => "form-control", :placeholder => "E.g. \"Bruce\"" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :last_name, class: "col-sm-2 control-label" %>
+          <div class="col-sm-10">
+            <%= f.text_field :last_name, :class => "form-control", :placeholder => "E.g. \"Wayne\"" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :contact_phone_number, class: "col-sm-2 control-label" %>
+          <div class="col-sm-10">
+            <%= f.text_field :contact_phone_number, :class => "form-control", :placeholder => "E.g. \"1110003333\"" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :mailing_address, class: "col-sm-2 control-label" %>
+          <div class="col-sm-10">
+            <%= f.text_field :mailing_address, :class => "form-control", :placeholder => "E.g. \"1 Heroes Way, Chicago, IL\"" %>
+          </div>
+        </div>
+
+        <div class="form-group">
           <%= f.label :email, class: "col-sm-2 control-label" %>
           <div class="col-sm-10">
-            <%= f.email_field :email, autofocus: true, class: "form-control" %>
+            <%= f.email_field :email, class: "form-control", :placeholder => "E.g. \"batman@dc.com\"" %>
           </div>
         </div>
 
@@ -36,48 +64,6 @@
         </div>
 
         <div class="form-group">
-            <%= f.label :current_board_member, class: "col-sm-2 control-label" %>
-            <div class="col-sm-10">
-              <%= f.check_box :current_board_member, class: "col-sm-2 control-label" %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :contact_phone_number, class: "col-sm-2 control-label" %>
-            <div class="col-sm-10">
-              <%= f.text_field :contact_phone_number, :class => "form-control", :placeholder => "Enter contact phone number" %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :first_name, class: "col-sm-2 control-label" %>
-            <div class="col-sm-10">
-              <%= f.text_field :first_name, :class => "form-control", :placeholder => "Enter first name" %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :last_name, class: "col-sm-2 control-label" %>
-            <div class="col-sm-10">
-              <%= f.text_field :last_name, :class => "form-control", :placeholder => "Enter last name" %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :mailing_address, class: "col-sm-2 control-label" %>
-            <div class="col-sm-10">
-              <%= f.text_field :mailing_address, :class => "form-control", :placeholder => "Enter mailing address" %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :site_admin, class: "col-sm-2 control-label" %>
-            <div class="col-sm-10">
-              <%= f.check_box :site_admin, class: "col-sm-2 control-label" %>
-            </div>
-          </div>
-
-          <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
             <%= f.submit "Sign up", class: "btn btn-success btn-block" %>
           </div>
