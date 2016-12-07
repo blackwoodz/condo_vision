@@ -5,4 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+
+require 'csv'
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'units.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  t = Unit.new
+  t.unit_number = row['unit_number']
+  t.monthly_dues = row['monthly_dues']
+  t.save
+  puts "#{t.unit_number}, #{t.monthly_dues} saved"
+end
+
+puts "There are now #{Unit.count} rows in the units table"
