@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem "wdm" if Gem.win_platform?
 
+gem 'date_validator'
+
 gem 'jquery-ui-rails', '~> 4.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

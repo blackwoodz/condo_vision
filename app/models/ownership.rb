@@ -11,18 +11,12 @@ class Ownership < ApplicationRecord
 
   # Validations
 
-  validates :dues_delinquent, :presence => true
-
-  validates :end_date, :numericality => { :greater_than_or_equal_to => 0 }
-
   validates :owner_id, :presence => true
 
-  validates :recurring_payments_on, :presence => true
-
-  validates :start_date, :presence => true
-
-  validates :start_date, :numericality => { :greater_than_or_equal_to => 0 }
-
   validates :unit_id, :presence => true
+
+  validates :start_date, :presence => true, date: true
+
+  validates :end_date, date: {allow_blank: true, after: :start_date, message: 'Must be after start date'}
 
 end

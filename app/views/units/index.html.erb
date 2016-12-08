@@ -99,12 +99,12 @@
         <td><%= unit.unit_number %></td>
         <td>
           <% if unit.owner != nil %>
-          <%= unit.owner.first_name unit.owner.last_name %>
+          <%= unit.owner.first_name %> <%= unit.owner.last_name %>
           <% end %>
         </td>
         <td>
           <% if unit.tenant != nil %>
-          <%= unit.tenant.first_name unit.tenant.last_name %>
+          <%= unit.tenant.first_name %> <%= unit.tenant.last_name %>
           <% end %>
         </td>
         <td>$ <%= unit.monthly_dues %></td>

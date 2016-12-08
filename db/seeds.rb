@@ -9,14 +9,31 @@
 
 require 'csv'
 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'units.csv'))
+# csv_text = File.read(Rails.root.join('lib', 'seeds', 'units.csv'))
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# csv.each do |row|
+#   t = Unit.new
+#   t.unit_number = row['unit_number']
+#   t.monthly_dues = row['monthly_dues']
+#   t.save
+#   puts "#{t.unit_number}, #{t.monthly_dues} saved"
+# end
+#
+# puts "There are now #{Unit.count} rows in the units table"
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'users.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.each do |row|
-  t = Unit.new
-  t.unit_number = row['unit_number']
-  t.monthly_dues = row['monthly_dues']
+  t = User.new
+  t.first_name = row['first_name']
+  t.last_name = row['last_name']
+  t.email = row['email']
+  t.contact_phone_number = row['contact_phone_number']
+  t.password = row['password']
+  t.current_board_member = row['current_board_member']
+  t.site_admin = row['site_admin']
   t.save
-  puts "#{t.unit_number}, #{t.monthly_dues} saved"
+  puts "#{t.first_name} #{t.last_name} saved"
 end
 
-puts "There are now #{Unit.count} rows in the units table"
+puts "There are now #{User.count} users in the User table"

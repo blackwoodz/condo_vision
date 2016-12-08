@@ -11,14 +11,12 @@ class Tenancy < ApplicationRecord
 
   # Validations
 
-  validates :end_date, :numericality => { :greater_than_or_equal_to => 0 }
-
-  validates :start_date, :presence => true
-
-  validates :start_date, :numericality => { :greater_than_or_equal_to => 0 }
-
   validates :tenant_id, :presence => true
 
   validates :unit_id, :presence => true
+
+  validates :start_date, :presence => true, date: true
+
+  validates :end_date, date: {allow_blank: true, after: :start_date, message: 'Must be after start date'}
 
 end
