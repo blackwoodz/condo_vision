@@ -17,6 +17,6 @@ class Ownership < ApplicationRecord
 
   validates :start_date, :presence => true, date: true
 
-  validates :end_date, date: {allow_blank: true, after: :start_date, message: 'Must be after start date'}
+  validates :end_date, date: {allow_blank: true, after: :start_date, message: 'must be after start date'}
 
 end
