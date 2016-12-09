@@ -5,50 +5,55 @@
 </div>
 
 <div class="row">
-  <div class="col-md-2 card">
-    <h4>Groups</h4>
-    <br>
-    <a href="/users">All</a>
-    <hr>
-    <a href="/users/owners">Owners</a>
-    <hr>
-    <a href="/users/residents">Residents</a>
-    <hr>
-    <a href="/users/board_members">Board Members</a>
-    <hr>
-  </div>
+  <div class="col-md-3">
+    <div class="demo-card-square mdl-card mdl-shadow--2dp">
+      <div class="mdl-card__title mdl-card--expand">
+        <h2 class="mdl-card__title-text">Groups</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <a href="/users">All</a>
+        <hr>
+        <a href="/users/owners">Owners</a>
+        <hr>
+        <a href="/users/residents">Residents</a>
+        <hr>
+        <a href="/users/board_members">Board Members</a>
+      </div>
 
-  <div class="col-md-9 mb-2 col-md-offset-1">
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Contact phone number</th>
-          <th>Owner of:</th>
-          <th>Resident of:</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users.each do |user| %>
-        <tr>
-          <td><%= user.first_name %> <%= user.last_name %></td>
-          <td><%= user.email %></td>
-          <td><%= user.contact_phone_number %></td>
-          <td>
-            <% if user.owned_units != nil %>
-            <%= user.owned_units.pluck(:unit_number).to_sentence(words_connector: ', ', last_word_connector: ' and ') %>
-            <% end %>
-          </td>
-          <td>
-            <% if user.occupied_units != nil %>
-            <%= user.occupied_units.pluck(:unit_number).to_sentence(words_connector: ', ', last_word_connector: ' and ') %>
-            <% end %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= paginate @users, theme: 'twitter-bootstrap-4' %>
   </div>
+</div>
+
+<div class="col-md-8 mb-2 col-md-offset-1">
+  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact phone number</th>
+        <th>Owner of:</th>
+        <th>Resident of:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= user.first_name %> <%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.contact_phone_number %></td>
+        <td>
+          <% if user.owned_units != nil %>
+          <%= user.owned_units.pluck(:unit_number).to_sentence(words_connector: ', ', last_word_connector: ' and ') %>
+          <% end %>
+        </td>
+        <td>
+          <% if user.occupied_units != nil %>
+          <%= user.occupied_units.pluck(:unit_number).to_sentence(words_connector: ', ', last_word_connector: ' and ') %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @users, theme: 'twitter-bootstrap-4' %>
+</div>
 </div>
