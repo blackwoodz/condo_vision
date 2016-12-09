@@ -20,20 +20,46 @@ require 'csv'
 # end
 #
 # puts "There are now #{Unit.count} rows in the units table"
+#
+# csv_text = File.read(Rails.root.join('lib', 'seeds', 'users.csv'))
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# csv.each do |row|
+#   t = User.new
+#   t.first_name = row['first_name']
+#   t.last_name = row['last_name']
+#   t.email = row['email']
+#   t.contact_phone_number = row['contact_phone_number']
+#   t.password = row['password']
+#   t.current_board_member = row['current_board_member']
+#   t.site_admin = row['site_admin']
+#   t.save
+#   puts "#{t.first_name} #{t.last_name} saved"
+# end
+#
+# puts "There are now #{User.count} users in the User table"
 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'users.csv'))
+# csv_text = File.read(Rails.root.join('lib', 'seeds', 'tenants.csv'))
+# csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# csv.each do |row|
+#   t = Tenancy.new
+#   t.unit_id = row['unit_id']
+#   t.tenant_id = row['tenant_id']
+#   t.start_date = row['start_date']
+#   t.save
+#   puts "#{t.tenant_id} saved"
+# end
+#
+# puts "There are now #{Tenancy.count} tenancies in the Tenancy table"
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'owners.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.each do |row|
-  t = User.new
-  t.first_name = row['first_name']
-  t.last_name = row['last_name']
-  t.email = row['email']
-  t.contact_phone_number = row['contact_phone_number']
-  t.password = row['password']
-  t.current_board_member = row['current_board_member']
-  t.site_admin = row['site_admin']
+  t = Ownership.new
+  t.unit_id = row['unit_id']
+  t.owner_id = row['owner_id']
+  t.start_date = row['start_date']
   t.save
-  puts "#{t.first_name} #{t.last_name} saved"
+  puts "#{t.owner_id} saved"
 end
 
-puts "There are now #{User.count} users in the User table"
+puts "There are now #{Ownership.count} ownerships in the Ownership table"

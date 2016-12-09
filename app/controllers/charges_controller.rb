@@ -33,13 +33,21 @@ class ChargesController < ApplicationController
     redirect_to new_charge_path
   end
 
-  charge_details = Hash.new
-  charge_details[:invoice_id] = 1
-  charge_details[:amount] = @amount
-  charge_details[:status] = "Succeeded"
+  @payment = Payment.new
 
-  @payment_controller = PaymentsController.new
-  @payment_controller.charge(charge_details)
+  @payment.invoice_id = 1
+  @payment.amount = @amount
+  @payment.status = "Succeeded"
+
+  save_status = @payment.save
+
+
+  # charge_details = Hash.new
+  # charge_details[:invoice_id] = 1
+  # charge_details[:amount] = @amount
+  # charge_details[:status] = "Succeeded"
+  #
+  # charge(charge_details)
 
     # p = Payment.new
     # @payment.invoice_id = params[:invoice_id]
@@ -63,3 +71,13 @@ class ChargesController < ApplicationController
 
     # redirect_back(:fallback_location => "/", :notice => "Thanks! You paid $5.")
 end
+
+# def charge(charge_details)
+#   @payment = Payment.new
+#
+#   @payment.invoice_id = charge_details[:invoice_id]
+#   @payment.amount = charge_details[:amount]
+#   @payment.status = charge_details[:status]
+#
+#   save_status = @payment.save
+# end

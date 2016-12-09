@@ -1,7 +1,7 @@
 <div class="page-header">
-  <h1>
+  <h3>
     Directory for 949 Lake
-  </h1>
+  </h3>
 </div>
 
 <div class="row">
@@ -18,33 +18,36 @@
     <hr>
   </div>
 
-  <div class="col-md-10">
-    <table class="table table-striped table-hover card">
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Contact phone number</th>
-        <th>Owner of:</th>
-        <th>Resident of:</th>
-      </tr>
-
-      <% @users.each do |user| %>
-      <tr>
-        <td><%= user.first_name %> <%= user.last_name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.contact_phone_number %></td>
-        <td>
-          <% if user.owned_units != nil %>
+  <div class="col-md-9 mb-2 col-md-offset-1">
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Contact phone number</th>
+          <th>Owner of:</th>
+          <th>Resident of:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= user.first_name %> <%= user.last_name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.contact_phone_number %></td>
+          <td>
+            <% if user.owned_units != nil %>
             <%= user.owned_units.pluck(:unit_number).to_sentence(words_connector: ', ', last_word_connector: ' and ') %>
-          <% end %>
-        </td>
-        <td>
-          <% if user.occupied_units != nil %>
-            <% user.occupied_units.pluck(:unit_number).to_sentence(words_connector: ', ', last_word_connector: ' and ') %>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% if user.occupied_units != nil %>
+            <%= user.occupied_units.pluck(:unit_number).to_sentence(words_connector: ', ', last_word_connector: ' and ') %>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
     </table>
     <%= paginate @users, theme: 'twitter-bootstrap-4' %>
   </div>
