@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   root :to => "units#index"
 
+  resources :charges
+
   # Routes for the Invoice resource:
   # CREATE
   get "/invoices/new", :controller => "invoices", :action => "new"
