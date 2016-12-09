@@ -1,88 +1,88 @@
 <div class="page-header">
   <h1>
-    Invoices
+    My Invoices
     <a href="/invoices/new" class="btn btn-lg btn-success">New Invoice</a>
   </h1>
 </div><div class="row mb-1">
   <div class="col-md-12">
     <%= search_form_for @q, :class => "collapse", :id => "invoices_filters" do |f| %>
-      <p class="lead">Narrow results:</p>
+    <p class="lead">Narrow results:</p>
 
-        <div class="form-group">
-    <%= f.label :assessment_type_cont, "Assessment type contains" %>
-    <%= f.text_field :assessment_type_cont, :class => "form-control", :placeholder => "Assessment type contains" %>
-  </div>
-
-<div class="form-group">
-  <%= f.label :amount, "Amount" %>
-  <div class="row">
-    <div class='col-md-6 mb-1'>
-      <%= f.text_field :amount_gteq, :class => "form-control", :placeholder => "Amount greater than or equal to" %>
+    <div class="form-group">
+      <%= f.label :assessment_type_cont, "Assessment type contains" %>
+      <%= f.text_field :assessment_type_cont, :class => "form-control", :placeholder => "Assessment type contains" %>
     </div>
-    <div class='col-md-6'>
-      <%= f.text_field :amount_lteq, :class => "form-control", :placeholder => "Amount less than or equal to" %>
-    </div>
-  </div>
-</div>
 
-<div class="form-group">
-    <%= f.label :status_cont, "Status contains" %>
-    <%= f.text_field :status_cont, :class => "form-control", :placeholder => "Status contains" %>
-  </div>
-
-<div class="form-group">
-          <%= f.label :created_at, "Created at" %>
-          <div class="row">
-            <div class='col-md-6 mb-1'>
-              <div class='input-group date' id='created_atgteqPicker'>
-                  <%= f.text_field :created_at_gteq, :class => "form-control", :placeholder => "Created at greater than or equal to" %>
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-            </div>
-
-            <div class='col-md-6'>
-              <div class='input-group date' id='created_atlteqPicker'>
-                  <%= f.text_field :created_at_lteq, :class => "form-control", :placeholder => "Created at less than or equal to" %>
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-            </div>
-          </div>
+    <div class="form-group">
+      <%= f.label :amount, "Amount" %>
+      <div class="row">
+        <div class='col-md-6 mb-1'>
+          <%= f.text_field :amount_gteq, :class => "form-control", :placeholder => "Amount greater than or equal to" %>
+        </div>
+        <div class='col-md-6'>
+          <%= f.text_field :amount_lteq, :class => "form-control", :placeholder => "Amount less than or equal to" %>
+        </div>
       </div>
-      <script type="text/javascript">
-          $(function () {
-              $('#created_atgteqPicker').datetimepicker({
-                  format: 'YYYY-MM-DD hh:mm:SS'
-              });
-              $('#created_atlteqPicker').datetimepicker({
-                  useCurrent: false,
-                  format: 'YYYY-MM-DD hh:mm:SS'
-              });
-              $('#created_atgteqPicker').on("dp.change", function (e) {
-                  $('#created_atlteqPicker').data("DateTimePicker").minDate(e.date);
-              });
-              $('#created_atlteqPicker').on("dp.change", function (e) {
-                  $('#created_atgteqPicker').data("DateTimePicker").maxDate(e.date);
-              });
-          });
-      </script>
+    </div>
 
-        <div class="form-group">
+    <div class="form-group">
+      <%= f.label :status_cont, "Status contains" %>
+      <%= f.text_field :status_cont, :class => "form-control", :placeholder => "Status contains" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :created_at, "Created at" %>
+      <div class="row">
+        <div class='col-md-6 mb-1'>
+          <div class='input-group date' id='created_atgteqPicker'>
+            <%= f.text_field :created_at_gteq, :class => "form-control", :placeholder => "Created at greater than or equal to" %>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+
+        <div class='col-md-6'>
+          <div class='input-group date' id='created_atlteqPicker'>
+            <%= f.text_field :created_at_lteq, :class => "form-control", :placeholder => "Created at less than or equal to" %>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+    $(function () {
+      $('#created_atgteqPicker').datetimepicker({
+        format: 'YYYY-MM-DD hh:mm:SS'
+      });
+      $('#created_atlteqPicker').datetimepicker({
+        useCurrent: false,
+        format: 'YYYY-MM-DD hh:mm:SS'
+      });
+      $('#created_atgteqPicker').on("dp.change", function (e) {
+        $('#created_atlteqPicker').data("DateTimePicker").minDate(e.date);
+      });
+      $('#created_atlteqPicker').on("dp.change", function (e) {
+        $('#created_atgteqPicker').data("DateTimePicker").maxDate(e.date);
+      });
+    });
+    </script>
+
+    <div class="form-group">
       <%= f.label :owner_email_cont, "User email contains" %>
       <%= f.text_field :owner_email_cont, :class => "form-control", :placeholder => "User email contains" %>
     </div>
 
-<div class="form-group">
+    <div class="form-group">
       <%= f.label :unit_unit_number_cont, "Unit unit_number contains" %>
       <%= f.text_field :unit_unit_number_cont, :class => "form-control", :placeholder => "Unit unit_number contains" %>
     </div>
 
-      <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
+    <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
-      <a href="/invoices" class="btn btn-default btn-block mb-1">Clear filters</a>
+    <a href="/invoices" class="btn btn-default btn-block mb-1">Clear filters</a>
     <% end %>
     <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#invoices_filters">
       Show Filters
@@ -106,18 +106,16 @@
       <tr>
         <td>
           <% if invoice.unit.present? %>
-            <a href="/units/<%= invoice.unit.id %>">
-              <%= invoice.unit.unit_number %>
-            </a>
+          <%= invoice.unit.unit_number %>
           <% end %>
         </td>
         <td><%= invoice.status %></td>
         <td><%= invoice.amount %></td>
         <td>
           <% if invoice.owner.present? %>
-            <a href="/users/<%= invoice.owner.id %>">
-              <%= invoice.owner.email %>
-            </a>
+          <a href="/users/<%= invoice.owner.id %>">
+            <%= invoice.owner.email %>
+          </a>
           <% end %>
         </td>
         <td><%= invoice.assessment_type %></td>

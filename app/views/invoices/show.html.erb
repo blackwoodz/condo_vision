@@ -5,29 +5,41 @@
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
+      <dt>Owner</dt>
+      <dd>
+        <% if @invoice.owner.present? %>
+        <a href="/users/<%= @invoice.owner_id %>">
+          <%= @invoice.owner.first_name %> <%= @invoice.owner.last_name %>
+        </a>
+        <% end %>
+      </dd>
+
       <dt>Unit</dt>
       <dd>
         <% if @invoice.unit.present? %>
-          <a href="/units/<%= @invoice.unit_id %>">
             <%= @invoice.unit.unit_number %>
-          </a>
         <% end %>
       </dd>
 
       <dt>Status</dt>
       <dd><%= @invoice.status %></dd>
 
-      <dt>Amount</dt>
-      <dd><%= @invoice.amount %></dd>
+      <dt>Original Amount</dt>
+      <dd>$ <%= @invoice.amount %></dd>
 
-      <dt>Owner</dt>
+      <dt>Remaining Balance</dt>
       <dd>
-        <% if @invoice.owner.present? %>
-          <a href="/users/<%= @invoice.owner_id %>">
-            <%= @invoice.owner.email %>
-          </a>
+        <% if @invoice.payments != nil %>
+          <% @paidamt = 0 %>
+          <% @invoice.payments.each do |payment| %>
+            <% @paidamt += payment.amount %>
+          <% end %>
+          $ <%= @invoice.amount - @paidamt %>
+        <% else %>
+          $ <%= @invoice.amount %>
         <% end %>
       </dd>
+
 
       <dt>Assessment type</dt>
       <dd><%= @invoice.assessment_type %></dd>
@@ -91,15 +103,6 @@
         </label>
 
         <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="">
-      </div>
-
-      <!-- Label and input for status -->
-      <div class="form-group">
-        <label for="status" class="control-label">
-          Status
-        </label>
-
-        <input type="text" id="status" name="status" placeholder="Status" class="form-control" value="">
       </div>
 
       <button class="btn btn-block btn-success">

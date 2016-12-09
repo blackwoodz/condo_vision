@@ -16,7 +16,11 @@ class InvoicesController < ApplicationController
   def new
     @invoice = Invoice.new
 
-    render("invoices/new.html.erb")
+    if (current_user.site_admin != true)
+      redirect_back(:fallback_location => "/", :alert => "You are not a Site Admin, so you cannot create an invoice.")
+    else
+      render("invoices/new.html.erb")
+    end
   end
 
   def create
@@ -28,26 +32,34 @@ class InvoicesController < ApplicationController
     @invoice.owner_id = params[:owner_id]
     @invoice.assessment_type = params[:assessment_type]
 
-    save_status = @invoice.save
-
-    if save_status == true
-      referer = URI(request.referer).path
-
-      case referer
-      when "/invoices/new", "/create_invoice"
-        redirect_to("/invoices")
-      else
-        redirect_back(:fallback_location => "/", :notice => "Invoice created successfully.")
-      end
+    if (current_user.site_admin != true)
+      redirect_back(:fallback_location => "/", :alert => "You are not a Site Admin, so you cannot create an invoice.")
     else
-      render("invoices/new.html.erb")
+      save_status = @invoice.save
+
+      if save_status == true
+        referer = URI(request.referer).path
+
+        case referer
+        when "/invoices/new", "/create_invoice"
+          redirect_to("/invoices")
+        else
+          redirect_back(:fallback_location => "/", :notice => "Invoice created successfully.")
+        end
+      else
+        render("invoices/new.html.erb")
+      end
     end
   end
 
   def edit
     @invoice = Invoice.find(params[:id])
 
-    render("invoices/edit.html.erb")
+    if (current_user.site_admin != true)
+      redirect_back(:fallback_location => "/", :alert => "You are not a Site Admin, so you cannot delete an invoice.")
+    else
+      render("invoices/edit.html.erb")
+    end
   end
 
   def update
@@ -78,12 +90,16 @@ class InvoicesController < ApplicationController
   def destroy
     @invoice = Invoice.find(params[:id])
 
-    @invoice.destroy
-
-    if URI(request.referer).path == "/invoices/#{@invoice.id}"
-      redirect_to("/", :notice => "Invoice deleted.")
+    if (current_user.site_admin != true)
+      redirect_back(:fallback_location => "/", :alert => "You are not a Site Admin, so you cannot delete an invoice.")
     else
-      redirect_back(:fallback_location => "/", :notice => "Invoice deleted.")
+      @invoice.destroy
+
+      if URI(request.referer).path == "/invoices/#{@invoice.id}"
+        redirect_to("/", :notice => "Invoice deleted.")
+      else
+        redirect_back(:fallback_location => "/", :notice => "Invoice deleted.")
+      end
     end
   end
 end

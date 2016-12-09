@@ -15,8 +15,4 @@ class Payment < ApplicationRecord
 
   validates :amount, :numericality => { :greater_than => 0 }
 
-  validates :status, :presence => true
-
-  validates :status, :inclusion => { :in => [ 'Pending', ' Rejected', ' Succeeded' ]  }
-
 end
