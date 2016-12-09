@@ -63,7 +63,7 @@
 
   <div class="col-md-6 col-md-offset-1">
     <ul class="list-group">
-      <li class="list-group-item list-group-item-warning">
+      <li class="list-group-item list-group-item-info">
         Payments to Date
       </li>
 
@@ -89,14 +89,10 @@
           </button>
           <% else %>
           <div class="form-group">
-            <label for="amount" class="control-label">
-              New Payment
-            </label>
-
             <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="">
           </div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-            Create Payment
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+            Make a Payment
           </button>
           <% end %>
         </form>
