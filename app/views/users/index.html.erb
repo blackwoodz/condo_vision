@@ -24,7 +24,8 @@
         <th>Name</th>
         <th>Email</th>
         <th>Contact phone number</th>
-        <th>Actions</th>
+        <th>Owner of:</th>
+        <th>Resident of:</th>
       </tr>
 
       <% @users.each do |user| %>
@@ -33,7 +34,14 @@
         <td><%= user.email %></td>
         <td><%= user.contact_phone_number %></td>
         <td>
-          <a href="/users/<%= user.id %>" class="btn btn-primary">Show</a>
+          <% if user.owned_units != nil %>
+            <% user.owned_units.pluck(:unit_number).to_sentence(words_connector: ', ', last_word_connector: ' and ') %>
+          <% end %>
+        </td>
+        <td>
+          <% if user.occupied_units != nil %>
+            <% user.occupied_units.pluck(:unit_number).to_sentence(words_connector: ', ', last_word_connector: ' and ') %>
+          <% end %>
         </td>
       </tr>
       <% end %>

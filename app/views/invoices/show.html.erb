@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h3>Invoice #<%= @invoice.id %></h3>
+  <h3>Invoice for <%= Date::MONTHNAMES[@invoice.created_at.month] %> <%= @invoice.created_at.year %></h3>
 </div>
 
 <div class="row">
@@ -17,7 +17,7 @@
       <dt>Unit</dt>
       <dd>
         <% if @invoice.unit.present? %>
-            <%= @invoice.unit.unit_number %>
+        <%= @invoice.unit.unit_number %>
         <% end %>
       </dd>
 
@@ -30,13 +30,13 @@
       <dt>Remaining Balance</dt>
       <dd>
         <% if @invoice.payments != nil %>
-          <% @paidamt = 0 %>
-          <% @invoice.payments.each do |payment| %>
-            <% @paidamt += payment.amount %>
-          <% end %>
-          $ <%= @invoice.amount - @paidamt %>
+        <% @paidamt = 0 %>
+        <% @invoice.payments.each do |payment| %>
+        <% @paidamt += payment.amount %>
+        <% end %>
+        $ <%= @invoice.amount - @paidamt %>
         <% else %>
-          $ <%= @invoice.amount %>
+        $ <%= @invoice.amount %>
         <% end %>
       </dd>
 
@@ -50,12 +50,6 @@
       <a href="/invoices" class="btn btn-primary">
         Back
       </a>
-      <a href="/invoices/<%= @invoice.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_invoice/<%= @invoice.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
     </div>
   </div>
 </div>
@@ -66,49 +60,52 @@
   <div class="col-md-12">
     <ul class="list-group">
       <li class="list-group-item list-group-item-info">
-        Payments
+        Prior Payments for this Invoice
       </li>
 
       <% @invoice.payments.each do |payment| %>
-        <li class="list-group-item">
-          <a href="/payments/<%= payment.id %>">
-            <%= payment.invoice_id %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/payments/<%= payment.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/payments/<%= payment.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_payment/<%= payment.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
-        </li>
+      <li class="list-group-item">
+        <%= payment.created_at.strftime('%b %d %Y') %>: $ <%= payment.amount %>
+      </li>
       <% end %>
 
       <li class="list-group-item">
         <form action="/create_payment" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <!-- Label and input for invoice_id -->
-      <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
+          <!-- Label and input for invoice_id -->
+          <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
 
-      <!-- Label and input for amount -->
-      <div class="form-group">
-        <label for="amount" class="control-label">
-          Amount
-        </label>
+          <!-- Label and input for amount -->
+          <div class="form-group">
+            <label for="amount" class="control-label">
+              New Payment
+            </label>
 
-        <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="">
-      </div>
+            <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="">
+          </div>
 
-      <button class="btn btn-block btn-success">
-        Create Payment
-      </button>
-    </form>
+          <button class="btn btn-block btn-success">
+            Create Payment
+          </button>
+        </form>
+        <%= form_tag charges_path do %>
+          <article>
+            <% if flash[:error].present? %>
+              <div id="error_explanation">
+                <p><%= flash[:error] %></p>
+              </div>
+            <% end %>
+          </article>
+
+          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                  data-description="Association Dues"
+                  data-amount="500"
+                  data-locale="auto"></script>
+        <% end %>
+
       </li>
     </ul>
   </div>
