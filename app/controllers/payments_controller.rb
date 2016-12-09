@@ -26,7 +26,6 @@ class PaymentsController < ApplicationController
     @payment.status = charge_details[:status]
 
     save_status = @payment.save
-    render("/")
   end
 
   def create

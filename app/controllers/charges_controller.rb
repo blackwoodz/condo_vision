@@ -34,9 +34,9 @@ class ChargesController < ApplicationController
   end
 
   charge_details = Hash.new
-  charge_details[:invoice_id => 1]
-  charge_details[:amount => @amount]
-  charge_details[:status => "Succeeded"]
+  charge_details[:invoice_id] = 1
+  charge_details[:amount] = @amount
+  charge_details[:status] = "Succeeded"
 
   @payment_controller = PaymentsController.new
   @payment_controller.charge(charge_details)
@@ -61,4 +61,5 @@ class ChargesController < ApplicationController
     #   render("payments/new.html.erb")
     # end
 
+    # redirect_back(:fallback_location => "/", :notice => "Thanks! You paid $5.")
 end
