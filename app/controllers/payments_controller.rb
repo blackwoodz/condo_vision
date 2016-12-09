@@ -47,7 +47,7 @@ class PaymentsController < ApplicationController
         redirect_back(:fallback_location => "/", :notice => "Payment created successfully.")
       end
     else
-      render("payments/new.html.erb")
+      redirect_back(:fallback_location => "/", :alert => "Payment amount can't be blank.")
     end
   end
 
