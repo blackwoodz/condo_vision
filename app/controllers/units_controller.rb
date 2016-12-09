@@ -1,7 +1,7 @@
 class UnitsController < ApplicationController
   def index
     @q = Unit.ransack(params[:q])
-    @units = @q.result(:distinct => true).includes(:ownership, :tenancy, :invoices, :owner, :tenant).page(params[:page]).per(10)
+    @units = @q.result(:distinct => true).includes(:ownership, :tenancy, :invoices, :owner, :tenant).page(params[:page]).per(15)
 
     render("units/index.html.erb")
   end

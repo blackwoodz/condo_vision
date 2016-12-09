@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   # READ
   get "/invoices", :controller => "invoices", :action => "index"
+  get "/invoices/balance_due", :controller => "invoices", :action => "balance_due"
   get "/invoices/:id", :controller => "invoices", :action => "show"
 
   # UPDATE

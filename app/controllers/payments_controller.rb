@@ -18,6 +18,17 @@ class PaymentsController < ApplicationController
     render("payments/new.html.erb")
   end
 
+  def charge(charge_details)
+    @payment = Payment.new
+
+    @payment.invoice_id = charge_details[:invoice_id]
+    @payment.amount = charge_details[:amount]
+    @payment.status = charge_details[:status]
+
+    save_status = @payment.save
+    render("/")
+  end
+
   def create
     @payment = Payment.new
 

@@ -35,7 +35,7 @@
         <td><%= user.contact_phone_number %></td>
         <td>
           <% if user.owned_units != nil %>
-            <% user.owned_units.pluck(:unit_number).to_sentence(words_connector: ', ', last_word_connector: ' and ') %>
+            <%= user.owned_units.pluck(:unit_number).to_sentence(words_connector: ', ', last_word_connector: ' and ') %>
           <% end %>
         </td>
         <td>

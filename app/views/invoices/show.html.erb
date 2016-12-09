@@ -21,8 +21,25 @@
         <% end %>
       </dd>
 
+      <% if @invoice.payments != nil %>
+        <% @paidamt = 0 %>
+        <% @invoice.payments.each do |payment| %>
+          <% @paidamt += payment.amount %>
+        <% end %>
+        <% if @paidamt == 0%>
+          <% @status = "Unpaid" %>
+        <% elsif @invoice.amount > @paidamt %>
+          <% @status = "Partially Paid" %>
+        <% else %>
+          <% @status = "Paid in Full" %>
+        <% end %>
+      <% else %>
+        <% @status = "Unpaid" %>
+      <% end %>
       <dt>Status</dt>
-      <dd><%= @invoice.status %></dd>
+      <dd><%= @status %>
+
+      </dd>
 
       <dt>Original Amount</dt>
       <dd>$ <%= @invoice.amount %></dd>

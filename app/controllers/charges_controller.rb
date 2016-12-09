@@ -33,24 +33,32 @@ class ChargesController < ApplicationController
     redirect_to new_charge_path
   end
 
-    p = Payment.new
-    @payment.invoice_id = params[:invoice_id]
-    @payment.amount = params[:amount]
-    @payment.status = params[:status]
+  charge_details = Hash.new
+  charge_details[:invoice_id => 1]
+  charge_details[:amount => @amount]
+  charge_details[:status => "Succeeded"]
 
-    save_status = @payment.save
+  @payment_controller = PaymentsController.new
+  @payment_controller.charge(charge_details)
 
-    if save_status == true
-      referer = URI(request.referer).path
-
-      case referer
-      when "/payments/new", "/create_payment"
-        redirect_to("/payments")
-      else
-        redirect_back(:fallback_location => "/", :notice => "Payment created successfully.")
-      end
-    else
-      render("payments/new.html.erb")
-    end
+    # p = Payment.new
+    # @payment.invoice_id = params[:invoice_id]
+    # @payment.amount = params[:amount]
+    # @payment.status = params[:status]
+    #
+    # save_status = @payment.save
+    #
+    # if save_status == true
+    #   referer = URI(request.referer).path
+    #
+    #   case referer
+    #   when "/payments/new", "/create_payment"
+    #     redirect_to("/payments")
+    #   else
+    #     redirect_back(:fallback_location => "/", :notice => "Payment created successfully.")
+    #   end
+    # else
+    #   render("payments/new.html.erb")
+    # end
 
 end

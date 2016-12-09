@@ -1,9 +1,27 @@
 class InvoicesController < ApplicationController
   def index
-    @q = Invoice.ransack(params[:q])
-    @invoices = @q.result(:distinct => true).includes(:owner, :unit, :payments).page(params[:page]).per(10)
+    @invoices = Invoice.where("owner_id = ?", current_user.id.to_s).page(params[:page]).per(50)
+    @invoices.each do |inv|
+      paidamt = 0
+      inv.payments.each do |pmt|
+        paidamt += pmt.amount
+      end
+      if paidamt >= inv.amount
+        inv.status = "Paid in Full"
+        inv.save
+      elsif paidamt == 0
+        inv.status = "Unpaid"
+        inv.save
+      else
+        inv.status = "Partially Paid"
+        inv.save
+      end
+    end
+  end
 
-    render("invoices/index.html.erb")
+  def balance_due
+    @invoices = Invoice.where("status <> ? AND owner_id = ?", 'Paid in Full', current_user.id.to_s).page(params[:page]).per(50)
+    render("index")
   end
 
   def show

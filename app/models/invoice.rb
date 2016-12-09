@@ -1,5 +1,13 @@
 class Invoice < ApplicationRecord
   # Direct associations
+  # attr_accessor :status
+
+  # def paidamt
+  #   payments.each do |pmt|
+  #     paidamt += pmt.amount
+  #   end
+  #   # return paidamt
+  # end
 
   has_many   :payments,
              :dependent => :destroy
